@@ -3,13 +3,13 @@
 class TriggerCircuit
 {
 public:
-    TriggerCircuit(int sampleRate, float triggerWidthInMs = 1);
+    TriggerCircuit(int sampleRate, double triggerWidthInMs = 1);
 
-    void trigger(float accentVoltage = 4.0f);
-    float sample();
+    void trigger(double accentVoltage = 4.0);
+    double sample();
 
 private:
     int triggerWidthInSamples;
     int sampleCounter;
-    float accentVoltage;
+    double accentVoltage;
 };

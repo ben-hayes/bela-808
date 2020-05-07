@@ -1,19 +1,19 @@
 #include "TriggerCircuit.h"
 
-TriggerCircuit::TriggerCircuit(int sampleRate, float triggerWidthInMs)
+TriggerCircuit::TriggerCircuit(int sampleRate, double triggerWidthInMs)
 {
-    triggerWidthInSamples = (int)(0.001f * triggerWidthInMs * sampleRate);
+    triggerWidthInSamples = (int)(0.001 * triggerWidthInMs * sampleRate);
 }
 
-void TriggerCircuit::trigger(float accentVoltage)
+void TriggerCircuit::trigger(double accentVoltage)
 {
     this->accentVoltage = accentVoltage;
     sampleCounter = 0;
 }
 
-float TriggerCircuit::sample()
+double TriggerCircuit::sample()
 {
-    float out = 0.0f;
+    double out = 0.0;
 
     if (sampleCounter < triggerWidthInSamples - 1)
     {

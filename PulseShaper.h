@@ -1,46 +1,36 @@
 #pragma once
 
+#include "IIRAnalogFilter.h"
+#include "TR808Components.h"
+
 struct PulseShaperComponentValues
 {
-    float C40 = 0.015f;
-    float R162 = 4700.0f;
-    float R163 = 100000.0f;
+    double C40 = 0.015f;
+    double R162 = 4700.0f;
+    double R163 = 100000.0f;
 };
 
-class PulseShaperShelfFilter
+class PulseShaperShelfFilter : public IIRAnalogFilter
 {
 public:
     PulseShaperShelfFilter(
         int sampleRate,
-        PulseShaperComponentValues components);
-    
-    float process(float x);
+        TR808Components components);
 
-private:
-    float alpha[2];
-    float beta[2];
+protected:
+    TR808Components components;
 
-    float a1;
-    float b0;
-    float b1;
-
-    float last_y = 0.0f;
-    float last_x = 0.0f;
-
-    void calculateAnalogCoefficients(PulseShaperComponentValues components);
-    void calculateDigitalCoefficients(int sampleRate);
+    void calculateAnalogCoefficients() override;
 
 };
 
 class PulseShaper
 {
 public:
-    PulseShaper(int sampleRate);
+    PulseShaper(int sampleRate, TR808Components components);
+    double process(double x);
 
-    float process(float x);
 private:
-    PulseShaperComponentValues components;
+    TR808Components components;
     PulseShaperShelfFilter filter;
-
-    float memorylessNonlinearity(float voltage);
 };
