@@ -17,6 +17,10 @@ struct TR808Components
     double R167 = 1000000.0;
     double R169 = 47000.0;
     double R170 = 47000.0;
+    double R171 = 220.0;
+    double R172 = 10000.0;
+    double R176 = 100000.0;
+    double R177 = 82000.0;
 
     double Reffective = parallel(R161, R165 + R166, R170);
     double Rparallel = parallel(R161, R165 + R166);
@@ -25,8 +29,14 @@ struct TR808Components
     double C40 = 0.015 / 1000000.0;
     double C41 = 0.015 / 1000000.0;
     double C42 = 0.015 / 1000000.0;
-    double C43 = 33.0 /  1000000000.0; // Why the extra normalising factor? unclear, perhaps nanofarads. In any case, it appears to work.
+    double C43 = 33.0 /  1000000000.0; // Why the extra normalising factor?
+                                       // unclear, perhaps nanofarads.
+                                       // In any case, it appears to work.
+    double C45 = 0.1 / 1000000.0;
+    double C47 = 0.47 / 1000000.0;
+    double C49 = 0.47 / 1000000.0;
 
+    double VR5 = 10000.0;
     double VR6 = 500000.0;
 
     double upc4558Clipping = 1.0;

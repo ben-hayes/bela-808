@@ -5,7 +5,7 @@
 
 PulseShaperShelfFilter::PulseShaperShelfFilter(
     int sampleRate,
-    TR808Components components)
+    TR808Components& components)
     : IIRAnalogFilter(sampleRate, 1),
       components(components)
 {
@@ -24,7 +24,7 @@ void PulseShaperShelfFilter::calculateAnalogCoefficients()
     beta[1] = 1.0;
 }
 
-PulseShaper::PulseShaper(int sampleRate, TR808Components components)
+PulseShaper::PulseShaper(int sampleRate, TR808Components& components)
     : filter(sampleRate, components)
 {
 }

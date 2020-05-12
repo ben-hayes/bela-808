@@ -6,10 +6,10 @@
 class BridgedTFilter1 : public IIRAnalogFilter
 {
 public:
-    BridgedTFilter1(int sampleRate, TR808Components components);
+    BridgedTFilter1(int sampleRate, TR808Components& components);
 
 protected:
-    TR808Components components;
+    TR808Components& components;
 
     void calculateAnalogCoefficients() override;
 };
@@ -17,10 +17,10 @@ protected:
 class BridgedTFilter2 : public IIRAnalogFilter
 {
 public:
-    BridgedTFilter2(int sampleRate, TR808Components components);
+    BridgedTFilter2(int sampleRate, TR808Components& components);
 
 protected:
-    TR808Components components;
+    TR808Components& components;
 
     void calculateAnalogCoefficients() override;
 };
@@ -28,10 +28,10 @@ protected:
 class BridgedTFilter3 : public IIRAnalogFilter
 {
 public:
-    BridgedTFilter3(int sampleRate, TR808Components components);
+    BridgedTFilter3(int sampleRate, TR808Components& components);
 
 protected:
-    TR808Components components;
+    TR808Components& components;
 
     void calculateAnalogCoefficients() override;
 };
@@ -39,12 +39,12 @@ protected:
 class BridgedTNetwork
 {
 public:
-    BridgedTNetwork(int sampleRate, TR808Components components);
+    BridgedTNetwork(int sampleRate, TR808Components& components);
 
     double process(double pulse, double envelope, double feedback);
 
 private:
-    TR808Components components;
+    TR808Components& components;
     BridgedTFilter1 Hbt1;
     BridgedTFilter2 Hbt2;
     BridgedTFilter3 Hbt3;

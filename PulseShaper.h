@@ -8,10 +8,10 @@ class PulseShaperShelfFilter : public IIRAnalogFilter
 public:
     PulseShaperShelfFilter(
         int sampleRate,
-        TR808Components components);
+        TR808Components& components);
 
 protected:
-    TR808Components components;
+    TR808Components& components;
 
     void calculateAnalogCoefficients() override;
 
@@ -20,7 +20,7 @@ protected:
 class PulseShaper
 {
 public:
-    PulseShaper(int sampleRate, TR808Components components);
+    PulseShaper(int sampleRate, TR808Components& components);
     double process(double x);
 
 private:

@@ -5,10 +5,10 @@
 class RetriggeringPulseFilter : public IIRAnalogFilter
 {
 public:
-    RetriggeringPulseFilter(int sampleRate, TR808Components components);
+    RetriggeringPulseFilter(int sampleRate, TR808Components& components);
 
 private:
-    TR808Components components;
+    TR808Components& components;
 
     void calculateAnalogCoefficients();
 };
@@ -16,7 +16,7 @@ private:
 class RetriggeringPulse
 {
 public:
-    RetriggeringPulse(int sampleRate, TR808Components components);
+    RetriggeringPulse(int sampleRate, TR808Components& components);
     double process(double x);
 
 private:

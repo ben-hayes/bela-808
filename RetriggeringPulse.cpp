@@ -3,8 +3,9 @@
 
 RetriggeringPulseFilter::RetriggeringPulseFilter(
     int sampleRate,
-    TR808Components components)
-    : IIRAnalogFilter(sampleRate, 1)
+    TR808Components& components)
+    : IIRAnalogFilter(sampleRate, 1),
+      components(components)
 {
     init();
 }
@@ -19,7 +20,7 @@ void RetriggeringPulseFilter::calculateAnalogCoefficients()
 
 RetriggeringPulse::RetriggeringPulse(
     int sampleRate,
-    TR808Components components)
+    TR808Components& components)
     : filter(sampleRate, components)
 {
 }

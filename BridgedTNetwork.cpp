@@ -7,7 +7,7 @@
 
 BridgedTFilter1::BridgedTFilter1(
     int sampleRate,
-    TR808Components components)
+    TR808Components& components)
     : IIRAnalogFilter(sampleRate, 2),
       components(components)
 {
@@ -26,7 +26,7 @@ void BridgedTFilter1::calculateAnalogCoefficients()
 
 BridgedTFilter2::BridgedTFilter2(
     int sampleRate,
-    TR808Components components)
+    TR808Components& components)
     : IIRAnalogFilter(sampleRate, 2),
       components(components)
 {
@@ -49,7 +49,7 @@ void BridgedTFilter2::calculateAnalogCoefficients()
 
 BridgedTFilter3::BridgedTFilter3(
     int sampleRate,
-    TR808Components components)
+    TR808Components& components)
     : IIRAnalogFilter(sampleRate, 2),
       components(components)
 {
@@ -69,7 +69,7 @@ void BridgedTFilter3::calculateAnalogCoefficients()
                            // to achieve the correct magnitude response. odd.
 }
 
-BridgedTNetwork::BridgedTNetwork(int sampleRate, TR808Components components)
+BridgedTNetwork::BridgedTNetwork(int sampleRate, TR808Components& components)
     : components(components),
       Hbt1(sampleRate, components),
       Hbt2(sampleRate, components),

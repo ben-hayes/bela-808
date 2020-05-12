@@ -3,7 +3,7 @@
 
 FeedbackBuffer::FeedbackBuffer(
     int sampleRate,
-    TR808Components components)
+    TR808Components& components)
     : IIRAnalogFilter(sampleRate, 1),
       components(components)
 {
