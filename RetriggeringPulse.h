@@ -2,13 +2,23 @@
 #include "IIRAnalogFilter.h"
 #include "TR808Components.h"
 
-class RetriggeringPulse : public IIRAnalogFilter
+class RetriggeringPulseFilter : public IIRAnalogFilter
 {
 public:
-    RetriggeringPulse(int sampleRate, TR808Components components);
+    RetriggeringPulseFilter(int sampleRate, TR808Components components);
 
 private:
     TR808Components components;
 
     void calculateAnalogCoefficients();
+};
+
+class RetriggeringPulse
+{
+public:
+    RetriggeringPulse(int sampleRate, TR808Components components);
+    double process(double x);
+
+private:
+    RetriggeringPulseFilter filter;
 };

@@ -22,4 +22,5 @@ protected:
     void initialiseBuffers(int filterOrder);
     virtual void calculateAnalogCoefficients() = 0;
     void calculateDigitalCoefficients();
+    void printFilter();
 };

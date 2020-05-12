@@ -70,3 +70,34 @@ void IIRAnalogFilter::calculateDigitalCoefficients()
         b[2] = (C - D + beta[0]) / denom;
     }
 }
+
+void IIRAnalogFilter::printFilter()
+{
+    rt_printf("Alpha: ");
+    for (int i = 0; i <= filterOrder; i++)
+    {
+        rt_printf("%.5f, ", alpha[i]);
+    }
+    rt_printf("\n");
+
+    rt_printf("Beta: ");
+    for (int i = 0; i <= filterOrder; i++)
+    {
+        rt_printf("%.5f, ", beta[i]);
+    }
+    rt_printf("\n");
+
+    rt_printf("a: 1.0, ");
+    for (int i = 0; i < filterOrder; i++)
+    {
+        rt_printf("%.5f, ", a[i]);
+    }
+    rt_printf("\n");
+
+    rt_printf("b: ");
+    for (int i = 0; i <= filterOrder; i++)
+    {
+        rt_printf("%.5f, ", b[i]);
+    }
+    rt_printf("\n");
+}

@@ -15,7 +15,7 @@ double TriggerCircuit::sample()
 {
     double out = 0.0;
 
-    if (sampleCounter < triggerWidthInSamples - 1)
+    if (sampleCounter < triggerWidthInSamples)
     {
         out = accentVoltage;
         sampleCounter += 1;
