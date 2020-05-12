@@ -22,7 +22,7 @@ std::unique_ptr<FeedbackBuffer> feedbackBuffer;
 TR808Components c;
 
 double lastFb = 1.0;
-double feedbackPot = 0.5;
+double feedbackPot = 0.9999;
 
 int counter = 20000;
 

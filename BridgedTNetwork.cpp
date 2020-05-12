@@ -80,13 +80,12 @@ BridgedTNetwork::BridgedTNetwork(int sampleRate, TR808Components components)
 double BridgedTNetwork::process(double pulse, double envelope, double feedback)
 {
     const double tolerance = 0.0000001;
-    //auto noiseFloorTrig = rand() % 100000 / 1000000.0;
-    //auto noiseFloorFb = rand() % 100000 / 1000000.0;
     auto pulsePortion = Hbt1.process(pulse);
-    auto envPortion = Hbt3.process(envelope);// + noiseFloorTrig;
-    auto feedbackPortion = 0.0f;
+    auto envPortion = Hbt3.process(envelope);
+    auto feedbackPortion = 0.0;
     if (fabs(feedbackPortion) < tolerance) feedbackPortion = Hbt2.process(pulsePortion + envPortion);
-    else feedbackPortion = Hbt2.process(feedback);// + noiseFloorFb;
+    else feedbackPortion = Hbt2.process(feedback);
+    components.updateReffective(pulsePortion, feedbackPortion, envPortion);
 
     return constrain(
         pulsePortion + envPortion + feedbackPortion,
