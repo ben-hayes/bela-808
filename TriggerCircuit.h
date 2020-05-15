@@ -1,3 +1,11 @@
+// ===========================================================================
+// TR-808 Kick Drum Model
+// ECS7012P Music and Audio Programming: Final Project
+// Author: Ben Hayes
+// File: TriggerCircuit.h
+// Description: Generates a simple trigger signal given a desired width and
+//              accent.
+// ===========================================================================
 #pragma once
 
 class TriggerCircuit

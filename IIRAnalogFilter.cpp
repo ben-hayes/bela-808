@@ -1,4 +1,13 @@
+// ===========================================================================
+// TR-808 Kick Drum Model
+// ECS7012P Music and Audio Programming: Final Project
+// Author: Ben Hayes
+// File: IIRAnalogFilter.cpp
+// Description: The base class for all IIR filters in the project,
+//              implementing 1st and 2nd order bilinear transforms.
+// ===========================================================================
 #include <cmath>
+#include <cstring>
 #include <Bela.h>
 #include "IIRAnalogFilter.h"
 
@@ -20,12 +29,20 @@ IIRAnalogFilter::~IIRAnalogFilter()
 
 void IIRAnalogFilter::init()
 {
+    // init() must be called to fully initialise filter coefficients.
+    // Importantly, calculateAnalogCoefficients() is a pure virtual method
+    // -- the responsibility is on the subclass to populate beta[] and alpha[]
+    // with the appropriate number of values for the filter order.
     calculateAnalogCoefficients();
     calculateDigitalCoefficients();
 }
 
-double IIRAnalogFilter::process(double x)
+double IIRAnalogFilter::process(double x, bool withInit)
 {
+    if (withInit) init();
+
+    // Perform filtering using a TDF-II architecture -- this is less
+    // sensitive to time-varying coefficients:
     auto y = b[0] * x + v_[0];
     for (int i = 0; i < filterOrder - 1; i++)
     {
@@ -36,17 +53,45 @@ double IIRAnalogFilter::process(double x)
     return y;
 }
 
+void IIRAnalogFilter::setCoefficients(double* b_new, double* a_new)
+{
+    // Allow for direct setting of co-efficients (if using class just for its
+    // filtering capability and ignoring domain transfer)
+    for (int i = 0; i < filterOrder; i++)
+    {
+        b[i] = b_new[i];
+        a[i] = a_new[i];
+    }
+    b[filterOrder] = b_new[filterOrder];
+}
+
+double* IIRAnalogFilter::getFIRCoefficients()
+{
+    return b;
+}
+
+double* IIRAnalogFilter::getIIRCoefficients()
+{
+    return a;
+}
+
 void IIRAnalogFilter::initialiseBuffers(int filterOrder)
 {
     alpha = new double[filterOrder + 1];
+    memset(alpha, 0.0, sizeof(double) * (filterOrder + 1));
     beta = new double[filterOrder + 1];
+    memset(beta, 0.0, sizeof(double) * (filterOrder + 1));
     a = new double[filterOrder];
+    memset(a, 0.0, sizeof(double) * filterOrder);
     b = new double[filterOrder + 1];
+    memset(b, 0.0, sizeof(double) * (filterOrder + 1));
     v_ = new double[filterOrder];
+    memset(v_, 0.0, sizeof(double) * filterOrder);
 }
 
 void IIRAnalogFilter::calculateDigitalCoefficients()
 {
+    // Bilinear transform implemented for first and second order filters:
     auto T = 1.0 / sampleRate;
     if (filterOrder == 1)
     {
@@ -73,6 +118,8 @@ void IIRAnalogFilter::calculateDigitalCoefficients()
 
 void IIRAnalogFilter::printFilter()
 {
+    // Convenience method for printing coefficients in a format that's easily
+    // copy-pastable into MATLAB:
     rt_printf("Alpha: ");
     for (int i = 0; i <= filterOrder; i++)
     {

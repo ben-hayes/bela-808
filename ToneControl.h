@@ -1,3 +1,10 @@
+// ===========================================================================
+// TR-808 Kick Drum Model
+// ECS7012P Music and Audio Programming: Final Project
+// Author: Ben Hayes
+// File: ToneControl.h
+// Description: Implements tone control filters for output stage of 808 model.
+// ===========================================================================
 #pragma once
 #include "IIRAnalogFilter.h"
 #include "TR808Components.h"
